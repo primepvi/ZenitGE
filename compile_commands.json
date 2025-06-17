@@ -1,0 +1,6 @@
+[
+{
+  "directory": "/home/pedro/codes/shade",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-Ibuild/.gens/shade/linux/x86_64/release/platform/windows/idl", "-DGLFW_INCLUDE_NONE", "-I", "/home/pedro/.xmake/packages/g/glfw/3.4/4c3c72af70fd4599a3038fc662af9c28/include", "-I", "/home/pedro/.xmake/packages/g/glad/v0.1.36/9e3539cb78a3425b96246554411a0b79/include", "-DNDEBUG", "-o", "build/.objs/shade/linux/x86_64/release/src/main.cpp.o", "src/main.cpp"],
+  "file": "src/main.cpp"
+}]
