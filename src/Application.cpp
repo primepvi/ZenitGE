@@ -2,6 +2,9 @@
 #include <glad/glad.h>
 #include <iostream>
 
+#include "../include/Shader.hpp"
+#include "../include/ShaderProgram.hpp"
+
 int main(int argc, char **argv) {
   if (!glfwInit()) {
     std::cerr << "failed to init glfw." << std::endl;
@@ -22,6 +25,19 @@ int main(int argc, char **argv) {
   }
 
   std::cout << "OpenGL Version:" << glGetString(GL_VERSION) << std::endl;
+
+  Shader vertexShader =
+      Shader::fromPath(ShaderType::Vertex, "assets/shaders/basic.vert");
+  vertexShader.compile();
+
+  Shader fragShader =
+      Shader::fromPath(ShaderType::Fragment, "assets/shaders/basic.frag");
+  fragShader.compile();
+
+  ShaderProgram program;
+  program.attach(vertexShader);
+  program.attach(fragShader);
+  program.link();
 
   while (!glfwWindowShouldClose(window)) {
     glClearColor(0.0f, 0.0f, 0.1f, 1.0f);

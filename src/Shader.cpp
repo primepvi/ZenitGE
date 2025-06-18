@@ -1,4 +1,4 @@
-#include "shader.hpp"
+#include "../include/Shader.hpp"
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -10,7 +10,8 @@ Shader Shader::fromPath(ShaderType type, const std::string &path) {
     throw std::runtime_error("(Shader::fromPath) cannot open source file: " +
                              path);
 
-  std::stringstream buffer = std::stringstream() << sourceFile.rdbuf();
+  std::stringstream buffer;
+  buffer << sourceFile.rdbuf();
   std::string source = buffer.str();
 
   return Shader(type, source);
@@ -42,10 +43,11 @@ void Shader::compile() {
   }
 
   glGetShaderInfoLog(shaderId, 512, NULL, log);
-  std::stringstream errorBuffer = std::stringstream()
-                                  << "(Shader::compile): cannot compile the "
-                                  << shaderName << "shader.\n"
-                                  << log;
+  std::stringstream errorBuffer;
+  errorBuffer << "(Shader::compile): cannot compile the " << shaderName
+              << " Shader.\n"
+              << log << "\n"
+              << shaderSource;
 
   throw std::runtime_error(errorBuffer.str());
 }
