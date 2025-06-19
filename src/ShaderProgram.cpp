@@ -1,7 +1,15 @@
 #include "../include/ShaderProgram.hpp"
+#include <iostream>
 #include <stdexcept>
 
 ShaderProgram::ShaderProgram() : m_id(glCreateProgram()) {}
+ShaderProgram::~ShaderProgram() {
+  for (Shader &shader : this->m_shaders)
+    shader.destroy();
+
+  glDeleteProgram(this->m_id);
+  this->m_shaders.clear();
+}
 
 void ShaderProgram::attach(const Shader &shader) {
   this->m_shaders.push_back(shader);
@@ -21,8 +29,11 @@ void ShaderProgram::link() {
         std::string(log));
   }
 
-  for (const Shader &shader : this->m_shaders)
-    glDeleteShader(shader.getId());
+  std::cout << "(shader): Shader Program was compiled successfully."
+            << std::endl;
+
+  for (Shader &shader : this->m_shaders)
+    shader.destroy();
 
   this->m_shaders.clear();
 }

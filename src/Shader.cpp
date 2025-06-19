@@ -24,11 +24,16 @@ Shader Shader::fromSource(ShaderType type, const std::string &source) {
 Shader::Shader(ShaderType type, const std::string &source)
     : m_type(type), m_source(source), m_id(0) {}
 
+Shader::~Shader() {
+  if (this->m_id != 0)
+    this->destroy();
+}
+
 void Shader::compile() {
   const char *shaderSource = this->m_source.c_str();
   const char *shaderName =
       this->m_type == ShaderType::Fragment ? "Fragment" : "Vertex";
-  uint32_t shaderId = glCreateShader((GLenum)this->m_type);
+  GLuint shaderId = glCreateShader((GLenum)this->m_type);
   glShaderSource(shaderId, 1, &shaderSource, NULL);
   glCompileShader(shaderId);
 
@@ -37,8 +42,8 @@ void Shader::compile() {
   glGetShaderiv(shaderId, GL_COMPILE_STATUS, &success);
   if (success) {
     this->m_id = shaderId;
-    std::cout << "(shader): " << shaderName << " was compiled successfully."
-              << std::endl;
+    std::cout << "(shader): " << shaderName
+              << " Shader was compiled successfully." << std::endl;
     return;
   }
 
@@ -52,5 +57,5 @@ void Shader::compile() {
   throw std::runtime_error(errorBuffer.str());
 }
 
-uint32_t Shader::getId() const { return this->m_id; }
+GLuint Shader::getId() const { return this->m_id; }
 ShaderType Shader::getType() const { return this->m_type; }

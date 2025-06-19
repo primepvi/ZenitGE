@@ -1,10 +1,9 @@
 #pragma once
 
-#include <cstdint>
 #include <glad/glad.h>
 #include <string>
 
-enum class ShaderType {
+enum class ShaderType : GLenum {
   Vertex = GL_VERTEX_SHADER,
   Fragment = GL_FRAGMENT_SHADER,
 };
@@ -12,17 +11,24 @@ enum class ShaderType {
 class Shader {
 private:
   ShaderType m_type;
-  uint32_t m_id;
+  GLuint m_id;
   std::string m_source;
 
   Shader(ShaderType type, const std::string &source);
 
 public:
+  ~Shader();
+
   static Shader fromPath(ShaderType type, const std::string &path);
   static Shader fromSource(ShaderType type, const std::string &source);
 
   void compile();
 
+  inline void destroy() {
+    glDeleteShader(this->m_id);
+    this->m_id = 0;
+  }
+
   ShaderType getType() const;
-  uint32_t getId() const;
+  GLuint getId() const;
 };
