@@ -1,7 +1,7 @@
 add_rules("mode.debug", "mode.release", "module")
 add_requires("glfw", "glad")
 
-target("shade")
+target("zenit")
 set_kind("binary")
 add_files("src/*.cpp")
 add_includedirs("include")

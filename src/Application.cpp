@@ -15,7 +15,7 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  GLFWwindow *window = glfwCreateWindow(800, 600, "ShadeGE", nullptr, nullptr);
+  GLFWwindow *window = glfwCreateWindow(800, 600, "ZenitGE", nullptr, nullptr);
   if (!window) {
     std::cerr << "failed to create glfw window." << std::endl;
     return 1;
