@@ -10,20 +10,26 @@ VertexArray::VertexArray() : m_index(0) {
 
 VertexArray::~VertexArray() { glDeleteVertexArrays(1, &this->m_id); }
 
-void VertexArray::addBuffer(const VertexBuffer &vbo,
-                            const VertexLayout &layout) {
-  this->bind();
-  vbo.bind();
+void VertexArray::BindVertexBuffer(const VertexBuffer &vbo,
+                                   const VertexLayout &layout) {
+  this->Bind();
+  vbo.Bind();
 
-  for (const VertexAttribute &attribute : layout.getAttributes()) {
+  for (const VertexAttribute &attribute : layout.GetAttributes()) {
     size_t offset = attribute.offset;
 
     glEnableVertexAttribArray(this->m_index);
     glVertexAttribPointer(this->m_index++, attribute.count, attribute.type,
-                          attribute.normalized, layout.getStride(),
+                          attribute.normalized, layout.GetStride(),
                           (GLvoid *)offset);
   }
 
-  vbo.unbind();
-  this->unbind();
+  vbo.Unbind();
+  this->Unbind();
+}
+
+void VertexArray::BindElementBuffer(const ElementBuffer &ebo) {
+  this->Bind();
+  ebo.Bind();
+  this->Unbind();
 }

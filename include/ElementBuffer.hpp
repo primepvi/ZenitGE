@@ -4,14 +4,14 @@
 #include <cstdlib>
 #include <glad/glad.h>
 
-class VertexBuffer {
+class ElementBuffer {
 private:
   GLuint m_id;
   size_t m_size;
 
 public:
-  VertexBuffer(const void *data, size_t size, BufferUsage usage);
-  ~VertexBuffer();
+  ElementBuffer(const void *data, size_t size, BufferUsage usage);
+  ~ElementBuffer();
 
   void Bind() const;
   void Unbind() const;

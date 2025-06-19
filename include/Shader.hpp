@@ -19,16 +19,16 @@ private:
 public:
   ~Shader();
 
-  static Shader fromPath(ShaderType type, const std::string &path);
-  static Shader fromSource(ShaderType type, const std::string &source);
+  static Shader FromPath(ShaderType type, const std::string &path);
+  static Shader FromSource(ShaderType type, const std::string &source);
 
-  void compile();
+  void Compile();
 
-  inline void destroy() {
+  inline void Destroy() {
     glDeleteShader(this->m_id);
     this->m_id = 0;
   }
 
-  ShaderType getType() const;
-  GLuint getId() const;
+  inline ShaderType GetType() const { return this->m_type; }
+  inline GLuint GetId() const { return this->m_id; }
 };

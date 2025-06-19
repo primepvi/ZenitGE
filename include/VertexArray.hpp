@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ElementBuffer.hpp"
 #include "VertexBuffer.hpp"
 #include "VertexLayout.hpp"
 #include <cstddef>
@@ -14,8 +15,9 @@ public:
   VertexArray();
   ~VertexArray();
 
-  inline void bind() const { glBindVertexArray(this->m_id); }
-  inline void unbind() const { glBindVertexArray(0); }
+  inline void Bind() const { glBindVertexArray(this->m_id); }
+  inline void Unbind() const { glBindVertexArray(0); }
 
-  void addBuffer(const VertexBuffer &vbo, const VertexLayout &layout);
+  void BindVertexBuffer(const VertexBuffer &vbo, const VertexLayout &layout);
+  void BindElementBuffer(const ElementBuffer &ebo);
 };

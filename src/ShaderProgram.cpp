@@ -5,18 +5,18 @@
 ShaderProgram::ShaderProgram() : m_id(glCreateProgram()) {}
 ShaderProgram::~ShaderProgram() {
   for (Shader &shader : this->m_shaders)
-    shader.destroy();
+    shader.Destroy();
 
   glDeleteProgram(this->m_id);
   this->m_shaders.clear();
 }
 
-void ShaderProgram::attach(const Shader &shader) {
+void ShaderProgram::Attach(const Shader &shader) {
   this->m_shaders.push_back(shader);
-  glAttachShader(this->m_id, shader.getId());
+  glAttachShader(this->m_id, shader.GetId());
 }
 
-void ShaderProgram::link() {
+void ShaderProgram::Link() {
   glLinkProgram(this->m_id);
 
   int success;
@@ -33,9 +33,9 @@ void ShaderProgram::link() {
             << std::endl;
 
   for (Shader &shader : this->m_shaders)
-    shader.destroy();
+    shader.Destroy();
 
   this->m_shaders.clear();
 }
 
-void ShaderProgram::use() const { glUseProgram(this->m_id); }
+void ShaderProgram::Use() const { glUseProgram(this->m_id); }

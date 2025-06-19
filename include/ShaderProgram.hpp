@@ -12,7 +12,7 @@ public:
   ShaderProgram();
   ~ShaderProgram();
 
-  void attach(const Shader &shader);
-  void link();
-  void use() const;
+  void Attach(const Shader &shader);
+  void Link();
+  void Use() const;
 };

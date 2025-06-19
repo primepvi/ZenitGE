@@ -4,7 +4,7 @@
 #include <sstream>
 #include <stdexcept>
 
-Shader Shader::fromPath(ShaderType type, const std::string &path) {
+Shader Shader::FromPath(ShaderType type, const std::string &path) {
   std::ifstream sourceFile(path);
   if (!sourceFile)
     throw std::runtime_error("(Shader::fromPath) cannot open source file: " +
@@ -17,7 +17,7 @@ Shader Shader::fromPath(ShaderType type, const std::string &path) {
   return Shader(type, source);
 }
 
-Shader Shader::fromSource(ShaderType type, const std::string &source) {
+Shader Shader::FromSource(ShaderType type, const std::string &source) {
   return Shader(type, source);
 }
 
@@ -26,10 +26,10 @@ Shader::Shader(ShaderType type, const std::string &source)
 
 Shader::~Shader() {
   if (this->m_id != 0)
-    this->destroy();
+    this->Destroy();
 }
 
-void Shader::compile() {
+void Shader::Compile() {
   const char *shaderSource = this->m_source.c_str();
   const char *shaderName =
       this->m_type == ShaderType::Fragment ? "Fragment" : "Vertex";
@@ -56,6 +56,3 @@ void Shader::compile() {
 
   throw std::runtime_error(errorBuffer.str());
 }
-
-GLuint Shader::getId() const { return this->m_id; }
-ShaderType Shader::getType() const { return this->m_type; }

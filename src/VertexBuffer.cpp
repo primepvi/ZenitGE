@@ -9,15 +9,12 @@ VertexBuffer::VertexBuffer(const void *data, size_t size, BufferUsage usage)
     throw std::runtime_error(
         "(VertexBuffer::VertexBuffer): failed to generate vbo.");
 
-  glBindBuffer(GL_ARRAY_BUFFER, this->m_id);
+  this->Bind();
   glBufferData(GL_ARRAY_BUFFER, size, data, (GLenum)usage);
-  glBindBuffer(GL_ARRAY_BUFFER, 0); // unbind
+  this->Unbind();
 }
 
 VertexBuffer::~VertexBuffer() { glDeleteBuffers(1, &this->m_id); }
 
-void VertexBuffer::bind() const { glBindBuffer(GL_ARRAY_BUFFER, this->m_id); }
-void VertexBuffer::unbind() const { glBindBuffer(GL_ARRAY_BUFFER, 0); }
-
-GLuint VertexBuffer::getId() const { return this->m_id; }
-size_t VertexBuffer::getSize() const { return this->m_size; }
+void VertexBuffer::Bind() const { glBindBuffer(GL_ARRAY_BUFFER, this->m_id); }
+void VertexBuffer::Unbind() const { glBindBuffer(GL_ARRAY_BUFFER, 0); }

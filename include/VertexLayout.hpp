@@ -18,11 +18,11 @@ private:
 
 public:
   VertexLayout();
-  void pushFloat(GLuint count);
+  void PushFloat(GLuint count);
 
-  inline const std::vector<VertexAttribute> &getAttributes() const {
+  inline const std::vector<VertexAttribute> &GetAttributes() const {
     return this->m_attributes;
   }
 
-  inline size_t getStride() const { return this->m_stride; }
+  inline size_t GetStride() const { return this->m_stride; }
 };
